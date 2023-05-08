@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import agent from '../../../utils/agent';
 
-export default function useGetCoins() {
-  const { isLoading, isError, data } = useQuery({
-    queryKey: ['addresses'],
+export default function useGetCoins(page: number) {
+  const { isLoading, isError, data, isFetching } = useQuery({
+    queryKey: ['paginated-coins', page],
     queryFn: async () => {
-      const { data: axiosData } = await agent.Currency.getCoins();
+      const { data: axiosData } = await agent.Currency.getCoins(page);
 
       return axiosData;
     },
   });
 
-  return { isLoading, isError, data };
+  return { isLoading, isError, data, isFetching };
 }

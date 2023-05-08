@@ -13,8 +13,8 @@ const requests = {
 };
 
 const Currency = {
-  // TODO: handle pagination
-  getCoins: () => requests.get<CoinType[]>(`/coins/markets?vs_currency=usd&page=1&per_page=20&price_change_percentage`),
+  getCoins: (page: number) =>
+    requests.get<CoinType[]>(`/coins/markets?vs_currency=usd&page=${page}&per_page=20&price_change_percentage=24h,7d`),
 };
 
 const agent = {
